@@ -1,0 +1,15 @@
+{
+  "name": "smart_content_assistant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "smart_content_assistant/index.js",
+  "scripts": {
+    "dev": "node smart_content_assistant/index.js"
+  },
+  "keywords": [],
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "openai": "^7.57.0"
+  }
+}
