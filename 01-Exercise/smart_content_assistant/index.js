@@ -3,7 +3,6 @@ import OpenAI from "openai";
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
-
 if (!process.env.OPENAI_API_KEY) {
   console.error("Error: OPENAI_API_KEY is missing from your .env");
   process.exit(1);
@@ -13,11 +12,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const MODEL = "gpt-4.1-mini";
+
 const rl = readline.createInterface({
   input,
   output,
 });
-
 
 const writingStyles = {
   creative: {
@@ -33,7 +33,6 @@ const writingStyles = {
   },
 };
 
-
 const getUserTopic = async () => {
   while (true) {
     const topic = await rl.question("\nEnter your blog topic: ");
@@ -45,8 +44,6 @@ const getUserTopic = async () => {
     console.log("Please enter a valid topic.");
   }
 };
-
-
 
 const getWritingStyle = async () => {
   while (true) {
@@ -64,15 +61,13 @@ const getWritingStyle = async () => {
   }
 };
 
-
-
 const generateOutline = async (topic, style) => {
   const selectedStyle = writingStyles[style];
 
   console.log("\nGenerating your blog outline...\n");
 
   const stream = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
+    model: MODEL,
 
     messages: [
       {
@@ -122,11 +117,9 @@ const generateOutline = async (topic, style) => {
   return fullOutline;
 };
 
-
-
 const summarizeOutline = async (outline) => {
   const response = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
+    model: MODEL,
 
     messages: [
       {
@@ -152,10 +145,9 @@ const summarizeOutline = async (outline) => {
   return response.choices[0]?.message?.content?.trim() || "";
 };
 
-
 const answerQuestion = async (outline, question) => {
   const response = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
+    model: MODEL,
 
     messages: [
       {
@@ -240,6 +232,5 @@ const main = async () => {
     rl.close();
   }
 };
-
 
 main();
