@@ -1,0 +1,15 @@
+{
+  "name": "Text_",
+  "version": "1.0.0",
+  "description": "",
+  "main": "T/smart_content_assistant/index.js",
+  "scripts": {
+    "dev": "node Text_to_Speech_API/index.js"
+  },
+  "keywords": [],
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "openai": "^7.57.0"
+  }
+}
